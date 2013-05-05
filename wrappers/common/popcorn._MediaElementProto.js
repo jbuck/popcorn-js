@@ -55,8 +55,8 @@
   };
 
   // Make sure the browser has MediaError
-  MediaError = MediaError || (function() {
-    function MediaError(code, msg) {
+  if ( !window.MediaError ) {
+    var MediaError = function MediaError(code, msg) {
       this.code = code || null;
       this.message = msg || "";
     }
@@ -66,9 +66,8 @@
     MediaError.MEDIA_ERR_DECODE         = 3;
     MediaError.MEDIA_ERR_NONE_SUPPORTED = 4;
 
-    return MediaError;
-  }());
-
+    window.MediaError = MediaError;
+  }
 
   function MediaElementProto(){}
   MediaElementProto.prototype = {
